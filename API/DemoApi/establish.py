@@ -32,3 +32,13 @@ class Establish():
             if child['data']['id'] != []:
                 childid.append(child['data']['id'])  # 获取3个直推好友ID
         return childid
+
+    # 建立根节点
+    def creat_rootid(self):
+        rootid = int(time.time() * 1000)
+        self.establish(rootid, None, 1)  # 建立根节点
+        f = open('rootid.txt', 'w')
+        f.truncate(0)
+        f.write(str(rootid))
+        f.close()
+        return rootid

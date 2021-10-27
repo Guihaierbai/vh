@@ -1,0 +1,9 @@
+基础环境：
+    python3.8
+    requests
+    pytest
+    time
+
+备注：
+    测试机构用户1W人升级条件时使用分布式方法执行，安装parallel插件
+    命令行执行：pytest -s xxx.py --workers=auto --tests-per-worker=auto   注：使用auto由程序自动分配进程及线程，服务器可能过载，建议3*3
