@@ -1,5 +1,7 @@
 import time
 
+import pymysql
+
 from API.DemoApi.establish import Establish
 
 # 优秀推客-团队成员有200个VIP，同时满足三条线，每条线有1个推客
@@ -7,6 +9,20 @@ from API.DemoApi.establish import Establish
 class TestExcellentTer():
     def setup(self):
         self.establish = Establish()
+
+    def teardown_method(self):
+        conn = pymysql.connect(host="47.100.54.254", user="root", password="12345678", database="video-helper",
+                               port=40000, charset='utf8')
+        cursor = conn.cursor()
+        f = open("./rootid.txt")
+        rootid = f.read()
+        f.close()
+        sql = "DELETE FROM group_info where account_id = {} or up_ids like '%{}%'".format(rootid, rootid)
+        cursor.execute(sql)
+        conn.commit()
+        cursor.close()
+        conn.close()
+        print("删除")
 
     # 直推3个推客且团队成员有200个VIP
     def test_ex_ter_1(self):
