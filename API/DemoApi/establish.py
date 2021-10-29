@@ -3,7 +3,7 @@ import time
 import requests
 
 
-class BaseApi():
+class Establish():
 
     # 用户关系建立
     def establish(self, id, upid, level):

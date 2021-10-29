@@ -1,18 +1,16 @@
 import json
 import time
 
-import allure
 import pymysql
 
-from API.DemoApi import baseapi
-from API.DemoApi.baseapi import BaseApi
+from API.DemoApi.establish import Establish
 
 
 # VIP-直推3个好友
 
 class TestVip():
     def setup(self):
-        self.api = BaseApi()
+        self.establish = Establish()
 
     def teardown_method(self):
         conn = pymysql.connect(host="47.100.54.254", user="root", password="12345678", database="video-helper",
@@ -28,66 +26,66 @@ class TestVip():
         conn.close()
         print("删除")
 
-    @allure.title("直推3个普通人")
-    def test_vip_1(self, setup):
-        rootid = self.api.creat_rootid()
+    # 直推3个普通人
+    def test_vip_1(self):
+        rootid = self.establish.creat_rootid()
         print('rootid=%d' %rootid)
         for i in range(1, 4):
-            self.api.establish(i + rootid, rootid, 1)  # 根节点下添加3个普通成员
-        r = self.api.groupinfo(rootid)
+            self.establish.establish(i + rootid, rootid, 1)  # 根节点下添加3个普通成员
+        r = self.establish.groupinfo(rootid)
         # print(json.dumps(r.json(), indent=2))
         assert r.json()['data']['data']['level'] == 2
 
-    @allure.title("直推2个好友")
+    # 直推2个好友
     def test_vip_2(self):
-        rootid = self.api.creat_rootid()
+        rootid = self.establish.creat_rootid()
         print('rootid=%d' % rootid)
         for i in range(1, 3):
-            self.api.establish(i + rootid, rootid, 1)
-        r = self.api.groupinfo(rootid)
+            self.establish.establish(i + rootid, rootid, 1)
+        r = self.establish.groupinfo(rootid)
         assert r.json()['data']['data']['level'] == 1
 
-    @allure.title("直推4个好友")
+    # 直推4个好友
     def test_vip_3(self):
-        rootid = self.api.creat_rootid()
+        rootid = self.establish.creat_rootid()
         print('rootid=%d' % rootid)
         for i in range(1, 5):
-            self.api.establish(i + rootid, rootid, 1)
-        r = self.api.groupinfo(rootid)
+            self.establish.establish(i + rootid, rootid, 1)
+        r = self.establish.groupinfo(rootid)
         assert r.json()['data']['data']['level'] == 2
 
-    @allure.title("直推3个VIP")
+    # 直推3个VIP
     def test_vip_4(self):
-        rootid = self.api.creat_rootid()
+        rootid = self.establish.creat_rootid()
         print('rootid=%d' % rootid)
         for i in range(1, 4):
-            self.api.establish(i + rootid, rootid, 2)
-        r = self.api.groupinfo(rootid)
+            self.establish.establish(i + rootid, rootid, 2)
+        r = self.establish.groupinfo(rootid)
         assert r.json()['data']['data']['level'] == 2
 
-    @allure.title("直推3个推客")
+    # 直推3个推客
     def test_vip_5(self):
-        rootid = self.api.creat_rootid()
+        rootid = self.establish.creat_rootid()
         print('rootid=%d' % rootid)
         for i in range(1, 4):
-            self.api.establish(i + rootid, rootid, 3)
-        r = self.api.groupinfo(rootid)
+            self.establish.establish(i + rootid, rootid, 3)
+        r = self.establish.groupinfo(rootid)
         assert r.json()['data']['data']['level'] == 2
 
-    @allure.title("直推3个优秀推客")
+    # 直推3个优秀推客
     def test_vip_6(self):
-        rootid = self.api.creat_rootid()
+        rootid = self.establish.creat_rootid()
         print('rootid=%d' % rootid)
         for i in range(1, 4):
-            self.api.establish(i + rootid, rootid, 4)
-        r = self.api.groupinfo(rootid)
+            self.establish.establish(i + rootid, rootid, 4)
+        r = self.establish.groupinfo(rootid)
         assert r.json()['data']['data']['level'] == 2
 
-    @allure.title("直推3个卓越推客")
+    # 直推3个卓越推客
     def test_vip_7(self):
-        rootid = self.api.creat_rootid()
+        rootid = self.establish.creat_rootid()
         print('rootid=%d' % rootid)
         for i in range(1, 4):
-            self.api.establish(i + rootid, rootid, 5)
-        r = self.api.groupinfo(rootid)
+            self.establish.establish(i + rootid, rootid, 5)
+        r = self.establish.groupinfo(rootid)
         assert r.json()['data']['data']['level'] == 2

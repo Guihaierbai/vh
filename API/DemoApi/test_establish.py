@@ -1,7 +1,7 @@
 import json
 import time
 
-from API.DemoApi.baseapi import Establish
+from API.DemoApi.establish import Establish
 
 '''
 各级别升级条件：
