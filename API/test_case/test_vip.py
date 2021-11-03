@@ -25,7 +25,7 @@ class TestVip():
         print("删除")
 
     @allure.title("直推3个普通人")
-    def test_vip_1(self, setup):
+    def test_vip_1(self):
         rootid = self.api.creat_rootid()
         print('rootid=%d' %rootid)
         for i in range(1, 4):
