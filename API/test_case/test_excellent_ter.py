@@ -9,8 +9,8 @@ class TestExcellentTer():
         self.api = BaseApi()
 
     def teardown_method(self):
-        conn = pymysql.connect(host="47.100.54.254", user="root", password="12345678", database="video-helper",
-                               port=40000, charset='utf8')
+        conn = pymysql.connect(host="139.224.52.53", user="root", password="12345678", database="video-helper",
+                               port=43306, charset='utf8')
         cursor = conn.cursor()
         f = open("./rootid.txt")
         rootid = f.read()

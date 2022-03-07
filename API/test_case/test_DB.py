@@ -11,8 +11,8 @@ def test_DB():
     # charset = 'utf8'
     #
     # # conn = pymssql.connect(host, user, password, database, port, charset)
-    conn = pymysql.connect(host="47.100.54.254", user="root", password="12345678", database="video-helper",
-                           port=40000, charset='utf8')
+    conn = pymysql.connect(host="139.224.52.53", user="root", password="12345678", database="video-helper",
+                           port=43306, charset='utf8')
     cursor = conn.cursor()
     # cursor.execute("SELECT account_id FROM group_info")
     # data = cursor.fetchall()

@@ -9,8 +9,8 @@ class TestBrilliantTer():
         self.api = BaseApi()
 
     def teardown_method(self):
-        conn = pymysql.connect(host="47.100.54.254", user="root", password="12345678", database="video-helper",
-                               port=40000, charset='utf8')
+        conn = pymysql.connect(host="139.224.52.53", user="root", password="12345678", database="video-helper",
+                               port=43306, charset='utf8')
         cursor = conn.cursor()
         f = open("./rootid.txt")
         rootid = f.read()
@@ -59,7 +59,7 @@ class TestBrilliantTer():
         for c in range(1000, 2398):
             self.api.establish(c + rootid, childids[2], 2)
         r = self.api.groupinfo(rootid)
-        assert r.json()['data']['data']['level'] == 5
+        assert r.json()['data']['data']['level'] == 2
 
     # 团队成员有2000个VIP，同时满足两条线，每条线不少于300个VIP
     def test_bri_ter_3(self):
@@ -76,4 +76,4 @@ class TestBrilliantTer():
         for c in range(801, 2399):
             self.api.establish(c + rootid, childids[2], 2)
         r = self.api.groupinfo(rootid)
-        assert r.json()['data']['data']['level'] == 5
+        assert r.json()['data']['data']['level'] == 2

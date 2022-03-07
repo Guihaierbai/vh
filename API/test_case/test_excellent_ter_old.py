@@ -2,15 +2,15 @@ import allure
 import pymysql
 from API.DemoApi.baseapi import BaseApi
 
-# 优秀推客-团队成员有200个VIP，同时满足三条线，每条线有1个推客
+# 老逻辑：优秀推客-团队成员有200个VIP，同时满足三条线，每条线有1个推客
 
 class TestExcellentTerOld():
     def setup(self):
         self.api = BaseApi()
 
     def teardown_method(self):
-        conn = pymysql.connect(host="47.100.54.254", user="root", password="12345678", database="video-helper",
-                               port=40000, charset='utf8')
+        conn = pymysql.connect(host="139.224.52.53", user="root", password="12345678", database="video-helper",
+                               port=43306, charset='utf8')
         cursor = conn.cursor()
         f = open("./rootid.txt")
         rootid = f.read()
@@ -34,7 +34,7 @@ class TestExcellentTerOld():
             assert child2.json()['errCode'] == 0
         self.api.establish(3 + rootid, rootid, 3)
         r = self.api.groupinfo(rootid)
-        assert r.json()['data']['data']['level'] == 4
+        assert r.json()['data']['data']['level'] == 3
 
     @allure.title("直推3个优秀推客且团队成员有200个推客")
     def test_ex_ter_2(self):
@@ -48,7 +48,7 @@ class TestExcellentTerOld():
             assert child2.json()['errCode'] == 0
         self.api.establish(300 + rootid, rootid, 4)
         r = self.api.groupinfo(rootid)
-        assert r.json()['data']['data']['level'] == 4
+        assert r.json()['data']['data']['level'] == 3
 
     @allure.title("直推2个推客且团队成员有200个VIP")
     def test_ex_ter_3(self):
@@ -113,7 +113,7 @@ class TestExcellentTerOld():
             assert r.json()['errCode'] == 0
         self.api.establish(200 + rootid, rootid, 3)
         r = self.api.groupinfo(rootid)
-        assert r.json()['data']['data']['level'] == 4
+        assert r.json()['data']['data']['level'] == 3
 
     @allure.title("两条线各间推一个推客，第三条线直推一个推客且团队成员有200VIP")
     def test_ex_ter_8(self):
@@ -129,4 +129,4 @@ class TestExcellentTerOld():
             assert child2.json()['errCode'] == 0
         self.api.establish(6 + rootid, rootid, 3)     # 直推一个推客触发上级升级
         r = self.api.groupinfo(rootid)
-        assert r.json()['data']['data']['level'] == 4
+        assert r.json()['data']['data']['level'] == 3
